@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'will_paginate', '~> 3.0'
+gem 'friendly_id', '~> 5.0.0'
 
 gem 'haml', '~> 4.0.5'
+gem 'haml-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.8'

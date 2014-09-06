@@ -5,6 +5,7 @@ Bookmarkme::Application.routes.draw do
 
   resources :users
   resources :sessions
+  resources :topics
 
   root to: 'welcome#index'
 
