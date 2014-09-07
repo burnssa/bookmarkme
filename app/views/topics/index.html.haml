@@ -1,2 +1,16 @@
-%h1 Topics#index
+%h1 These are all the topics with their bookmarks
 %p Find me in app/views/topics/index.html.haml
+
+.row
+	.span9
+	- @topics.each do |topic| 
+		.row
+		= topic.title
+		= topic.id
+		.span3
+		- topic_bookmarks = topic.bookmarks
+		- topic_bookmarks.each do |bookmark|
+			.row
+			= bookmark.description
+			= bookmark.url
+			= bookmark.id

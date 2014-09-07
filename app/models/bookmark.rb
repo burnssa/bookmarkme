@@ -1,3 +1,5 @@
 class Bookmark < ActiveRecord::Base
-	belongs_to: user, through: topic
+	belongs_to :user
+	belongs_to :topic
+
 end

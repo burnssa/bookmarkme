@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906064007) do
+ActiveRecord::Schema.define(version: 20140906235900) do
 
   create_table "bookmarks", force: true do |t|
     t.datetime "created_at"
@@ -19,8 +19,11 @@ ActiveRecord::Schema.define(version: 20140906064007) do
     t.string   "url"
     t.boolean  "liked"
     t.integer  "user_id"
+    t.integer  "topic_id"
+    t.string   "description"
   end
 
+  add_index "bookmarks", ["topic_id"], name: "index_bookmarks_on_topic_id"
   add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id"
 
   create_table "friendly_id_slugs", force: true do |t|
@@ -41,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140906064007) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   add_index "topics", ["user_id"], name: "index_topics_on_user_id"
@@ -50,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140906064007) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
 end

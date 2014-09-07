@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'will_paginate', '~> 3.0'
 gem 'friendly_id', '~> 5.0.0'
+gem 'faker'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 gem 'haml', '~> 4.0.5'
 gem 'haml-rails'
