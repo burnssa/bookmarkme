@@ -7,6 +7,8 @@ Bookmarkme::Application.routes.draw do
   resources :sessions
   resources :topics
 
+  post :incoming, to: 'incoming#create'
+
   root 'welcome#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
