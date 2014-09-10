@@ -1,2 +1,7 @@
-%h1 Topics#show
-%p Find me in app/views/topics/show.html.haml
+.container
+	.col-md-3
+	- @bookmarks.each do |bookmark|
+		%p{:style => "word-break:break-all;"}
+			= link_to bookmark.description, bookmark.url
+%p 
+	= link_to "Back", topics_path

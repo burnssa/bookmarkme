@@ -1,16 +1,22 @@
-%h1 These are all the topics with their bookmarks
-%p Find me in app/views/topics/index.html.haml
 
-.row
-	.span9
-	- @topics.each do |topic| 
+.container
+	%h1 These are all the topics with their bookmarks
+	%p Find me in app/views/topics/index.html.haml
+
+	- @topics.each do |topic|
 		.row
-		= topic.title
-		= topic.id
-		.span3
-		- topic_bookmarks = topic.bookmarks
-		- topic_bookmarks.each do |bookmark|
-			.row
-			= bookmark.description
-			= bookmark.url
-			= bookmark.id
+		%br 
+		%u
+			= link_to topic.title, topic_path(topic)
+			= topic.id
+			.div
+				%br
+				- topic_bookmarks = topic.bookmarks
+				.row
+					- topic_bookmarks.each do |bookmark|
+						.col-xs-3.col-xs-3
+							%p{:style => "word-break:break-all;"}
+								- if bookmark.thumbnail_url
+									= "#{bookmark.thumbnail_url}"
+									= image_tag(bookmark.thumbnail_url)
+								= link_to bookmark.description, bookmark.url

@@ -39,10 +39,17 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    embedly (1.9.1)
+      json
+      oauth
+      querystring
     erubis (2.7.0)
     execjs (2.2.1)
     faker (1.4.2)
       i18n (~> 0.5)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     friendly_id (5.0.4)
       activerecord (>= 4.0.0)
     haml (4.0.5)
@@ -67,7 +74,9 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.10.1)
+    oauth (0.4.7)
     polyglot (0.3.5)
+    querystring (0.1.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -128,7 +137,9 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.2.0)
   coffee-rails (~> 4.0.0)
+  embedly
   faker
+  figaro
   friendly_id (~> 5.0.0)
   haml (~> 4.0.5)
   haml-rails

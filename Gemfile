@@ -5,6 +5,7 @@ gem 'friendly_id', '~> 5.0.0'
 gem 'faker'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
+gem 'embedly'
 
 gem 'haml', '~> 4.0.5'
 gem 'haml-rails'
@@ -43,6 +44,7 @@ end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'figaro'
 
 # Use unicorn as the app server
 # gem 'unicorn'
