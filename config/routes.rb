@@ -15,15 +15,15 @@ Bookmarkme::Application.routes.draw do
   root 'welcome#index'
 
 
-  def create_route
-    data = Multimap.new
-    data[:priority] = 0
-    data[:description] = "Sample route"
-    data[:expression] = "catch_all()"
-    data[:action] = "forward('http://bookmarkme.co/incoming/')"
-    RestClient.post "https://api:key-001f3e35b63856b602eb46751e3382d4"\
-    "@api.mailgun.net/v2/routes", data
-  end
+  # def create_route
+  #   data = Multimap.new
+  #   data[:priority] = 0
+  #   data[:description] = "Sample route"
+  #   data[:expression] = "catch_all()"
+  #   data[:action] = "forward('http://bookmarkme.co/incoming/')"
+  #   RestClient.post "https://api:key-001f3e35b63856b602eb46751e3382d4"\
+  #   "@api.mailgun.net/v2/routes", data
+  # end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
