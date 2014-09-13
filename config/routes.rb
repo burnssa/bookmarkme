@@ -10,7 +10,8 @@ Bookmarkme::Application.routes.draw do
 
   #post :incoming, to: 'incoming#create'
   post :incoming, to: 'incoming#create'
-
+  get :incoming, to: 'incoming#create'
+  
   root 'welcome#index'
 
 
