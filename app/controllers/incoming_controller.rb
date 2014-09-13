@@ -27,7 +27,25 @@ class IncomingController < ApplicationController
       end     
     end
 
+    def mailin():  
+    # see if the message is spam:
+    is_spam = request.form['X-Mailgun-SFlag'] == 'Yes'
+
+    # access some of the email parsed values:
+    request.form['From']
+    request.form['To']
+    request.form['subject']
+
+    # stripped text does not include the original (quoted) message, only what
+    # a user has typed:
+    text = request.form['stripped-text']
+    request.form['stripped-signature']
+
+    puts "#{text}"
+    return "Ok"
+
     bookmark.save
+    puts "#{bookmark.description}"
 
     # You put the message-splitting and business
     # magic here. 

@@ -1,4 +1,5 @@
 Bookmarkme::Application.routes.draw do
+  get "emails_controller/post"
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
@@ -7,6 +8,7 @@ Bookmarkme::Application.routes.draw do
   resources :sessions
   resources :topics
 
+  #post :incoming, to: 'incoming#create'
   post :incoming, to: 'incoming#create'
 
   root 'welcome#index'
