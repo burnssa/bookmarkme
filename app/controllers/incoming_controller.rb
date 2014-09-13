@@ -9,7 +9,10 @@ class IncomingController < ApplicationController
     puts "INCOMING PARAMS HERE: #{params}"
 
     # find the user by the sender 
-    current_user = User.find_by_email(params[:sender])
+
+    sender = params['sender']
+
+    current_user = User.find_by_email(sender)
 
     bookmark = Bookmark.new(url: params['stripped-text'])
 
@@ -27,25 +30,26 @@ class IncomingController < ApplicationController
       end     
     end
 
-    def mailin():  
-    # see if the message is spam:
-    is_spam = request.form['X-Mailgun-SFlag'] == 'Yes'
+    # def mailin():  
+    #     # see if the message is spam:
+    #     is_spam = request.form['X-Mailgun-SFlag'] == 'Yes'
 
-    # access some of the email parsed values:
-    request.form['From']
-    request.form['To']
-    request.form['subject']
+    #     # access some of the email parsed values:
+    #     request.form['From']
+    #     request.form['To']
+    #     request.form['subject']
 
-    # stripped text does not include the original (quoted) message, only what
-    # a user has typed:
-    text = request.form['stripped-text']
-    request.form['stripped-signature']
+    #     # stripped text does not include the original (quoted) message, only what
+    #     # a user has typed:
+    #     text = request.form['stripped-text']
+    #     request.form['stripped-signature']
 
-    puts "#{text}"
-    return "Ok"
+    #     puts "#{text}"
+    #     return "Ok"
 
-    bookmark.save
-    puts "#{bookmark.description}"
+    #     bookmark.save
+    #     puts "#{bookmark.description}"
+    # end
 
     # You put the message-splitting and business
     # magic here. 
