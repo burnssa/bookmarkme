@@ -7,8 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div id="container">
-		<div id="user_header">
+	<div class="container">
+		<div class="pull-right user-info">
 			<% if current_user %>
 				Logged in as <%= current_user.email %>
 				<%= link_to "Log Out", logout_path, method: :delete %>
@@ -19,9 +19,6 @@
 			<% end %>
 		</div>
 
-		<%= flash.each do |name, msg| %>
-			<%= content_tag :div, msg, id: "flash_#{name}" %>
-		<% end %>
 		<%= yield %>
 		</div>
 	</body>

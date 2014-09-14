@@ -1,14 +1,15 @@
 
 .container
-	%h1 These are all the topics with their bookmarks
-	%p Find me in app/views/topics/index.html.haml
+	%h1 Your bookmarks
+	%p Edit your topic titles or click through to see all the bookmarks under each topic
 
 	- @topics.each do |topic|
 		.row
 		%br 
-		%u
-			= link_to topic.title, topic_path(topic)
-			= topic.id
+		%p
+			= best_in_place topic, :title
+			%br
+			= link_to "See bookmarks", topic_path(topic)
 			.div
 				%br
 				- topic_bookmarks = topic.bookmarks

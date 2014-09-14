@@ -22,8 +22,9 @@ class IncomingController < ApplicationController
     topic_descriptions = []
     topic_names.each {|topic| topic_descriptions << topic.sub(/#/, '')}
 
-    bookmark.save
     
+    bookmark.save
+
 
     # topic_descriptions.each do |t|
     #   if current_user.topics.find { |topic| topic[:description] == t} == true

@@ -6,6 +6,7 @@ gem 'faker'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'embedly'
+gem 'best_in_place', :git => 'https://github.com/aaronchi/best_in_place.git'
 
 gem 'haml', '~> 4.0.5'
 gem 'haml-rails'
