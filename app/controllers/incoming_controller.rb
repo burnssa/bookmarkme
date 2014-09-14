@@ -22,13 +22,16 @@ class IncomingController < ApplicationController
     topic_descriptions = []
     topic_names.each {|topic| topic_descriptions << topic.sub(/#/, '')}
 
-    topic_descriptions.each do |t|
-      if current_user.topics.find { |topic| topic[:description] == t} == true
-        bookmark.topic = t
-      else
-        bookmark.topic = Topic.new(description: t)
-      end     
-    end
+    bookmark.save
+    
+
+    # topic_descriptions.each do |t|
+    #   if current_user.topics.find { |topic| topic[:description] == t} == true
+    #     bookmark.topic = t
+    #   else
+    #     bookmark.topic = Topic.new(description: t)
+    #   end     
+    # end
 
     # def mailin():  
     #     # see if the message is spam:
