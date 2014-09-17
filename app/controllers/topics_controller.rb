@@ -3,7 +3,7 @@ respond_to :html, :json
 
   def index
     @topics = current_user.topics
-		@bookmarks = current_user.bookmarks.paginate(page: params[:page], per_page: 4)
+		@bookmarks = current_user.bookmarks
     
     @bookmarks.each do |bookmark|
       @thumbnail_url = bookmark.thumbnail_url

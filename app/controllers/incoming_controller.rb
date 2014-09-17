@@ -22,19 +22,22 @@ class IncomingController < ApplicationController
 
     topic_hashtags = params[:subject].split(' ')
     new_topic_titles = []
-    new_topic_titles.each {|topic| topic_descriptions << topic.sub(/#/, '')}
+    topic_hashtags.each {|topic| topic_descriptions << topic.sub(/#/, '')}
 
     current_topic_titles = Topic.get_current_topic_titles
 
-    bookmarks.map.each_with_index do |b, t|
-      if current_topic_titles.include?(topic_descriptions[t])
-        b.topic = topic_descriptions[t]
-      else
-        bookmark.topic = Topic.new(description: topic_description[t])
-        bookmark.save
-        topic = bookmark.topic
-        topic.save
-      end     
+    bookmarks.each do |b| 
+      new_topic_titles.map.each do |t|
+        if current_topic_titles.include?(t)
+          b.topic = t
+        else    
+          b.topic = Topic.new(description: t)
+          topic = b.topic
+          topic.save
+        end 
+        bookmark = b 
+        bookmark.save   
+      end
     end
 
     
