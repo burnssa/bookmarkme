@@ -13,7 +13,7 @@ class IncomingController < ApplicationController
 
     sender = params['sender']
 
-    current_user = User.find_by_email(sender) ||= User.new(email: params['sender'], password: 'Asdf1234', password_confirmation: 'Asdf1234')
+    current_user = { User.find_by_email(sender) ||= User.new(email: params['sender'], password: 'Asdf1234', password_confirmation: 'Asdf1234') }
     puts "#{sender}"
     puts "#{current_user.name}"
 
