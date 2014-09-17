@@ -14,7 +14,7 @@
 				%br
 				- topic_bookmarks = topic.bookmarks
 				.row
-					- topic_bookmarks.each do |bookmark|
+					- topic_bookmarks[0..4].each do |bookmark|
 						.col-xs-3.col-xs-3
 							%p{:style => "word-break:break-all;"}
 								- if bookmark.thumbnail_url

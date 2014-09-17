@@ -2,6 +2,7 @@ class IncomingController < ApplicationController
 
   # http://stackoverflow.com/questions/1177863/how-do-i-ignore-the-authenticity-token-for-specific-actions-in-rails
   skip_before_filter :verify_authenticity_token, only: [:create]
+  require 'uri'
 
   def create
     # Take a look at these in your server logs
@@ -12,48 +13,32 @@ class IncomingController < ApplicationController
 
     sender = params['sender']
 
-    current_user = User.find_by_email(sender)
+    current_user = User.find_by_email(sender) ||= User.new(email: sender)
+    puts "#{sender}"
+    puts "#{current_user}"
 
-    bookmark = Bookmark.new(url: params['stripped-text'])
-
-    bookmark.user = current_user
+    extracted_links = URI.extract(params['stripped-text'])
+    bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: current_user.id) }
 
     topic_names = params[:subject].split(' ')
     topic_descriptions = []
-    topic_names.each {|topic| topic_descriptions << topic.sub(/#/, '')}
+    topic_names.each do {|topic| topic_descriptions << topic.sub(/#/, '')}
+
+    bookmarks.map.each_with_index do |b, t|
+      if current_user.topic_descriptions.find { |topic| topic[:description] == t} == true
+        b.topic = t
+      else
+        bookmark.topic = Topic.new(description: t)
+        bookmark.save
+        
+        topic = bookmark.topic
+        topic.save
+      end     
+    end
 
     
-    bookmark.save
 
 
-    # topic_descriptions.each do |t|
-    #   if current_user.topics.find { |topic| topic[:description] == t} == true
-    #     bookmark.topic = t
-    #   else
-    #     bookmark.topic = Topic.new(description: t)
-    #   end     
-    # end
-
-    # def mailin():  
-    #     # see if the message is spam:
-    #     is_spam = request.form['X-Mailgun-SFlag'] == 'Yes'
-
-    #     # access some of the email parsed values:
-    #     request.form['From']
-    #     request.form['To']
-    #     request.form['subject']
-
-    #     # stripped text does not include the original (quoted) message, only what
-    #     # a user has typed:
-    #     text = request.form['stripped-text']
-    #     request.form['stripped-signature']
-
-    #     puts "#{text}"
-    #     return "Ok"
-
-    #     bookmark.save
-    #     puts "#{bookmark.description}"
-    # end
 
     # You put the message-splitting and business
     # magic here. 
