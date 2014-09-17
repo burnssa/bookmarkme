@@ -13,7 +13,7 @@ class IncomingController < ApplicationController
 
     sender = params['sender']
 
-    current_user = User.find_by_email(sender) ||= User.new(email: sender)
+    current_user = User.find_by_email(sender)
     puts "#{sender}"
     puts "#{current_user}"
 
