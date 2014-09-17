@@ -15,7 +15,7 @@ class IncomingController < ApplicationController
 
     current_user = User.find_by_email(sender)
     puts "#{sender}"
-    puts "#{current_user}"
+    puts "#{current_user.name}"
 
     extracted_links = URI.extract(params['stripped-text'])
     bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: current_user.id) }
@@ -23,6 +23,8 @@ class IncomingController < ApplicationController
     topic_hashtags = params[:subject].split(' ')
     new_topic_titles = []
     new_topic_titles.each {|topic| topic_descriptions << topic.sub(/#/, '')}
+
+    current_topic_titles = Topic.get_current_topic_titles
 
     bookmarks.map.each_with_index do |b, t|
       if current_topic_titles.include?(topic_descriptions[t])
