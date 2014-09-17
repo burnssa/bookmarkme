@@ -22,7 +22,7 @@ class IncomingController < ApplicationController
 
     topic_hashtags = params[:subject].split(' ')
     new_topic_titles = []
-    topic_hashtags.each {|topic| topic_descriptions << topic.sub(/#/, '')}
+    topic_hashtags.each {|topic| new_topic_titles << topic.sub(/#/, '')}
 
     current_topic_titles = Topic.get_current_topic_titles
 
