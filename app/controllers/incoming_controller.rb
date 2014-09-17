@@ -13,9 +13,10 @@ class IncomingController < ApplicationController
 
     sender = params['sender']
 
-    current_user = User.find_by_email(sender) || User.new(email: params['sender'], password: 'Asdf1234', password_confirmation: 'Asdf1234')
+    current_user = User.find_by_email(sender) || User.create!(email: params['sender'], password: 'Asdf1234', password_confirmation: 'Asdf1234')
     puts "#{sender}"
     puts "#{current_user.name}"
+    puts "#{params['stripped-text']}"
 
     extracted_links = URI.extract(params['stripped-text'])
     bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: current_user.id) }
@@ -31,7 +32,7 @@ class IncomingController < ApplicationController
         if current_topic_titles.include?(t)
           b.topic = t
         else    
-          b.topic = Topic.new(description: t)
+          b.topic = Topic.new(title: t)
           topic = b.topic
           topic.save
         end 
