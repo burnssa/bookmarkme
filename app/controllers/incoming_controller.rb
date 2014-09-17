@@ -20,17 +20,16 @@ class IncomingController < ApplicationController
     extracted_links = URI.extract(params['stripped-text'])
     bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: current_user.id) }
 
-    topic_names = params[:subject].split(' ')
-    topic_descriptions = []
-    topic_names.each do {|topic| topic_descriptions << topic.sub(/#/, '')}
+    topic_hashtags = params[:subject].split(' ')
+    new_topic_titles = []
+    new_topic_titles.each do {|topic| topic_descriptions << topic.sub(/#/, '')}
 
     bookmarks.map.each_with_index do |b, t|
-      if current_user.topic_descriptions.find { |topic| topic[:description] == t} == true
-        b.topic = t
+      if current_topic_titles.include?(topic_descriptions[t])
+        b.topic = topic_descriptions[t]
       else
-        bookmark.topic = Topic.new(description: t)
+        bookmark.topic = Topic.new(description: topic_description[t])
         bookmark.save
-        
         topic = bookmark.topic
         topic.save
       end     
