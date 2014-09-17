@@ -22,7 +22,7 @@ class IncomingController < ApplicationController
 
     topic_hashtags = params[:subject].split(' ')
     new_topic_titles = []
-    new_topic_titles.each do {|topic| topic_descriptions << topic.sub(/#/, '')}
+    new_topic_titles.each {|topic| topic_descriptions << topic.sub(/#/, '')}
 
     bookmarks.map.each_with_index do |b, t|
       if current_topic_titles.include?(topic_descriptions[t])
