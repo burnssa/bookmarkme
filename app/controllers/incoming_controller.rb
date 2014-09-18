@@ -20,7 +20,7 @@ class IncomingController < ApplicationController
 
     email_subject_string = params['stripped-text'].to_s
 
-    extracted_links = URI.extract(email_subject_string)
+    extracted_links = URI.extract(email_subject_string, ['ftp','http','https','ftp','mailto','www'])
     bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: current_user.id) }
 
     topic_hashtags = params[:subject].split(' ')
