@@ -18,7 +18,9 @@ class IncomingController < ApplicationController
     puts "#{current_user.name}"
     puts "#{params['stripped-text']}"
 
-    extracted_links = URI.extract(params['stripped-text'])
+    email_subject_string = params['stripped-text'].to_s
+
+    extracted_links = URI.extract(email_subject_string)
     bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: current_user.id) }
 
     topic_hashtags = params[:subject].split(' ')
