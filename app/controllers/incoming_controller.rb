@@ -29,24 +29,14 @@ class IncomingController < ApplicationController
 
     current_topic_titles = Topic.get_current_topic_titles
 
-    bookmarks.each do |b| 
-      new_topic_titles.map.each do |t|
-        if current_topic_titles.include?(t)
-          b.topic.title = t
-        else    
-          b.topic = Topic.new(title: t)
-          topic = b.topic
-          topic.save
-        end 
-        bookmark = b 
-        bookmark.save   
-      end
+    bookmarks.each_with_index do |b, t|
+      title_index = new_topic_titles[t] || new_topic_titles[-1]
+      b.topic = Topic.new(title: title_index)
+      topic = b.topic
+      topic.save
+      bookmark = b 
+      bookmark.save   
     end
-
-    
-
-
-
     # You put the message-splitting and business
     # magic here. 
 
