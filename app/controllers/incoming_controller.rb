@@ -20,7 +20,7 @@ class IncomingController < ApplicationController
 
     email_subject_string = params['stripped-text'].to_s
 
-    extracted_links = URI.extract(email_subject_string, ['ftp','http','https','ftp','mailto','www'])
+    extracted_links = URI.extract(email_subject_string, ['ftp','http','https','mailto','www'])
     bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: current_user.id) }
 
     topic_hashtags = params[:subject].split(' ')
@@ -31,7 +31,11 @@ class IncomingController < ApplicationController
 
     bookmarks.each_with_index do |b, t|
       title_index = new_topic_titles[t] || new_topic_titles[-1]
-      b.topic = Topic.new(title: title_index)
+      if current_topic_titles.include?(title_index)
+        b.topic = Topic.find_by_title(title_index)
+      else 
+        b.topic = Topic.new(title: title_index)
+      end
       topic = b.topic
       topic.save
       bookmark = b 
