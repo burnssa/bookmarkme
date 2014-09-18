@@ -32,7 +32,7 @@ class IncomingController < ApplicationController
     bookmarks.each do |b| 
       new_topic_titles.map.each do |t|
         if current_topic_titles.include?(t)
-          b.topic = t
+          b.topic.title = t
         else    
           b.topic = Topic.new(title: t)
           topic = b.topic
