@@ -31,11 +31,7 @@ class IncomingController < ApplicationController
 
     bookmarks.each_with_index do |b, t|
       title_index = new_topic_titles[t] || new_topic_titles[-1]
-      if current_topic_titles.include?(title_index)
-        b.topic = Topic.find_by_title(title_index)
-      else 
-        b.topic = Topic.new(title: title_index, user_id: current_user.id)
-      end
+      b.topic = Topic.find_or_create_by_title(title_index)
       topic = b.topic
       topic.save
       bookmark = b 

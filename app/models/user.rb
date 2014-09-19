@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
 	validates_uniqueness_of :email
 	validates :password, length: { in: 6..20 }
 
+	after_create :send_confirmation_email
+
+	private
+
+	def send_confirmation_email
+		# send confirmation instructions
+	end
+
 end
