@@ -34,7 +34,7 @@ class IncomingController < ApplicationController
       if current_topic_titles.include?(title_index)
         b.topic = Topic.find_by_title(title_index)
       else 
-        b.topic = Topic.new(title: title_index)
+        b.topic = Topic.new(title: title_index, user_id: current_user.id)
       end
       topic = b.topic
       topic.save
