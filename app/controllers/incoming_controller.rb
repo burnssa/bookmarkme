@@ -13,15 +13,15 @@ class IncomingController < ApplicationController
 
     sender = params['sender']
 
-    current_user = User.find_by_email(sender) || User.create!(email: params['sender'], password: 'Asdf1234', password_confirmation: 'Asdf1234')
+    email_user = User.find_by_email(sender) || User.create!(email: params['sender'], password: 'Asdf1234', password_confirmation: 'Asdf1234')
     puts "#{sender}"
-    puts "#{current_user.name}"
+    puts "#{email_user.name}"
     puts "#{params['stripped-text']}"
 
     email_subject_string = params['stripped-text'].to_s
 
     extracted_links = URI.extract(email_subject_string, ['ftp','http','https','mailto','www'])
-    bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: current_user.id) }
+    bookmarks = extracted_links.collect { |b| Bookmark.new(url: b, user_id: email_user.id) }
 
     topic_hashtags = params[:subject].split(' ')
     new_topic_titles = []

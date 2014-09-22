@@ -1,20 +1,7 @@
 %h1 Welcome to Bookmarkme
-%p See what everyone has been posting
+%p The easiest way to track the most fascinating, useful or shocking links you find on the internet 
+%br
 
-- @topics.each do |topic|
-	.row
-		%br 
-		%p
-			= topic.title
-			%br
-			= link_to "See more bookmarks", topic_path(topic)
-			.div
-				%br
-				- topic_bookmarks = topic.bookmarks
-				.row
-					- topic_bookmarks[0..4].each do |bookmark|
-						.col-xs-3.col-xs-3
-							%p{:style => "word-break:break-all;"}
-								- if bookmark.thumbnail_url
-									= image_tag(bookmark.thumbnail_url)
-								= link_to bookmark.description, bookmark.url
+%h3 The latest posts from around the web
+
+= render partial: 'all_topics'

@@ -1,6 +1,11 @@
 class Bookmark < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :topic
+	has_many :likes, dependent: :destroy
+
+  default_scope { order('updated_at DESC') }
+
+	scope :own_bookmarks, -> (user) { where(id: own_bookmark_ids(user)) }
 
 	#attr_accessor :thumbnail_url
 
@@ -21,4 +26,7 @@ class Bookmark < ActiveRecord::Base
     thumbnail_url
 	end
 
+	def own_bookmark_ids(user)
+		user.bookmarks.collect { |b| b[:id] }.to_a
+	end
 end

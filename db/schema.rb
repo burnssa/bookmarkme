@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906235900) do
+ActiveRecord::Schema.define(version: 20140921215252) do
 
   create_table "bookmarks", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
-    t.boolean  "liked"
+    t.boolean  "liked",       default: false
     t.integer  "user_id"
     t.integer  "topic_id"
     t.string   "description"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 20140906235900) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "bookmark_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["bookmark_id"], name: "index_likes_on_bookmark_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
 
   create_table "topics", force: true do |t|
     t.string   "title"

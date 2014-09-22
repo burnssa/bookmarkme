@@ -1,7 +1,16 @@
 .container
 	.col-md-3
-	- @bookmarks.each do |bookmark|
+	-if current_user
+		%h3 My latest bookmarks on #{@topic.title}
+		- @own_bookmarks.each do |bookmark|
+			%p{:style => "word-break:break-all;"}
+				= link_to bookmark.description, bookmark.url
+
+	%h3 The latest bookmarks from around the web on #{@topic.title}
+	- @others_bookmarks.each do |bookmark|
 		%p{:style => "word-break:break-all;"}
 			= link_to bookmark.description, bookmark.url
+			= render partial: 'likes/like', locals: { bookmark: bookmark }
+%br
 %p 
 	= link_to "Back", topics_path

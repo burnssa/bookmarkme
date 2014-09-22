@@ -1,0 +1,9 @@
+.like
+  - if like = current_user.liked(bookmark)
+    = link_to [bookmark, like], class: 'btn btn-danger', method: :delete do
+      %i.glyphicon.glyphicon-star-empty>
+      \  Unfavorite
+  - else
+    = link_to [bookmark, Like.new], class: 'btn btn-primary', method: :post do
+      %i.glyphicon.glyphicon-star>
+      \  Favorite

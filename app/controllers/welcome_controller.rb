@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
 	def index
-		#FIXME set up system for ranking top topics
-		@topics = Topic.all
-  end
+		@all_topics = Topic.order(created_at: :desc)
+	end
 end

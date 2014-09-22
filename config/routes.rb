@@ -6,7 +6,13 @@ Bookmarkme::Application.routes.draw do
 
   resources :users
   resources :sessions
-  resources :topics
+  resources :topics do 
+    resources :bookmarks 
+  end
+
+  resources :bookmarks do
+    resources :likes, only: [:create, :destroy]
+  end
 
   #post :incoming, to: 'incoming#create'
   post :incoming, to: 'incoming#create'
