@@ -1,14 +1,21 @@
 .container
 	.col-md-3
-	-if current_user
-		%h3 My latest bookmarks on #{@topic.title}
-		- @own_bookmarks.each do |bookmark|
-			%p{:style => "word-break:break-all;"}
-				= link_to bookmark.description, bookmark.url
+	-if current_user 
+		- if @personal_bookmarks && @personal_bookmarks.count > 0
+			%h3 Your latest bookmarks on #{@topic.title}
+			- @personal_bookmarks.each do |bookmark|
+				%p{:style => "word-break;"}
+					= link_to bookmark.description, bookmark.url
+					- if bookmark.thumbnail_url
+						= image_tag(bookmark.thumbnail_url)
+					= render partial: 'likes/like', locals: { bookmark: bookmark }
+		- else 
+			You don't have any bookmarks on #{@topic.title}
 
-	%h3 The latest bookmarks from around the web on #{@topic.title}
+
+	%h3 The latest other bookmarks from around the web on #{@topic.title}
 	- @others_bookmarks.each do |bookmark|
-		%p{:style => "word-break:break-all;"}
+		%p{:style => "word-break;"}
 			= link_to bookmark.description, bookmark.url
 			= render partial: 'likes/like', locals: { bookmark: bookmark }
 %br

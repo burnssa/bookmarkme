@@ -5,8 +5,6 @@ class Bookmark < ActiveRecord::Base
 
   default_scope { order('updated_at DESC') }
 
-	scope :own_bookmarks, -> (user) { where(id: own_bookmark_ids(user)) }
-
 	#attr_accessor :thumbnail_url
 
 	def embedly_api
@@ -24,9 +22,5 @@ class Bookmark < ActiveRecord::Base
     thumbnail_url = obj[0].thumbnail_url unless obj[0].blank? || obj[0].thumbnail_url.blank?
     #Rails.logger.info ">>>>>>>>>>>> #{thumbnail_url}"
     thumbnail_url
-	end
-
-	def own_bookmark_ids(user)
-		user.bookmarks.collect { |b| b[:id] }.to_a
 	end
 end
