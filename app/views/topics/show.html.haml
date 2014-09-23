@@ -1,13 +1,13 @@
 .container
-	.col-md-3
 	-if current_user 
+		.container
 		- if @personal_bookmarks && @personal_bookmarks.count > 0
 			%h3 Your latest bookmarks on #{@topic.title}
 			- @personal_bookmarks.each do |bookmark|
 				%p{:style => "word-break;"}
 					= link_to bookmark.description, bookmark.url
 					- if bookmark.thumbnail_url
-						= image_tag(bookmark.thumbnail_url)
+						= image_tag(bookmark.thumbnail_url, size: "64x64")
 					= render partial: 'likes/like', locals: { bookmark: bookmark }
 					- if bookmark.user_id == current_user.id
 						= render partial: 'bookmarks/bookmark', locals: { bookmark: bookmark }

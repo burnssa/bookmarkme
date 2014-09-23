@@ -18,6 +18,9 @@
 							%p{:style => "word-break;"}
 								- if bookmark.thumbnail_url
 									= image_tag(bookmark.thumbnail_url)
+						.row
+							.col-xs-3.col-xs-3
+								%p
 								= link_to bookmark.description, bookmark.url
 								- if bookmark.user_id != current_user.id
 									From #{User.find(bookmark.user_id).name ||= User.find(bookmark.user_id).email }

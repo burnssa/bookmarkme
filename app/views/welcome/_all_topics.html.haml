@@ -13,7 +13,7 @@
 						.col-xs-3.col-xs-3
 							%p{:style => "word-break:break-all;"}
 								- if bookmark.thumbnail_url
-									= image_tag(bookmark.thumbnail_url)
+									= image_tag(bookmark.thumbnail_url, size: "64x64")
 								= link_to bookmark.description, bookmark.url
 -else
 	- @all_topics.each do |topic|
@@ -30,5 +30,5 @@
 						.col-xs-3.col-xs-3
 							%p{:style => "word-break:break-all;"}
 								- if bookmark.thumbnail_url
-									= image_tag(bookmark.thumbnail_url)
+									= image_tag(bookmark.thumbnail_url, size: "64x64")
 								= link_to bookmark.description, bookmark.url
