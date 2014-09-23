@@ -7,7 +7,7 @@ Bookmarkme::Application.routes.draw do
   resources :users
   resources :sessions
   resources :topics do 
-    resources :bookmarks 
+    resources :bookmarks, only: [:destroy] 
   end
 
   resources :bookmarks do
