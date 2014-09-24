@@ -18,8 +18,8 @@ Bookmarkme::Application.routes.draw do
   post :incoming, to: 'incoming#create'
   get :incoming, to: 'incoming#create'
   
-  root 'welcome#index'
-
+  root :to => 'sites#index', :constraints => RoleConstraint.new(:current_user) #matches this route when the current user is an user
+  root :to => 'welcome#index'
 
   # def create_route
   #   data = Multimap.new
