@@ -4,7 +4,7 @@
 	%h3 See bookmarks from your latest topics below
 	%p Edit your topic titles or click through to see all the bookmarks under each topic
 	
-	- @own_topics.each do |topic|
+	- paginated_section @own_topics.each do |topic|
 		.row
 		%br 
 		%p
@@ -26,4 +26,19 @@
 									From #{User.find(bookmark.user_id).name ||= User.find(bookmark.user_id).email }
 	%br
 	%h3 See what other people are bookmarking from around the web 
-	= render partial: 'welcome/all_topics'
+		- will_paginate @others_topics.each do |topic|
+			.row
+			%br 
+			%p
+				= topic.title 
+				#{link_to(" See more", topic_path(topic))}
+				.div
+					%br
+					- topic_bookmarks = topic.bookmarks
+					.row
+						- topic_bookmarks[0..4].each do |bookmark|
+							.col-xs-3.col-xs-3
+								%p{:style => "word-break:break-all;"}
+									- if bookmark.thumbnail_url
+										= image_tag(bookmark.thumbnail_url, size: "64x64")
+									= link_to bookmark.description, bookmark.url

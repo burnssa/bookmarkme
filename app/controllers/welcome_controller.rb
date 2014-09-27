@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
 	def index
-		@all_topics = Topic.order(created_at: :desc)
+		@all_topics = Topic.all
 	end
 end

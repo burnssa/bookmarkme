@@ -13,10 +13,8 @@ respond_to :html, :json
     end
 
     @personal_topic_ids = (@user_topic_ids + @liked_topic_ids).uniq
-
-    @own_topics = Topic.where(id: @personal_topic_ids).paginate(page: params[:page], per_page: 10)
-		
-    @others_topics = Topic.where.not(id: @personal_topic_ids).paginate(page: params[:page], per_page: 10)
+    @own_topics = Topic.where(id: @personal_topic_ids).paginate(page: params[:page], per_page: 4)	
+    @others_topics = Topic.where.not(id: @personal_topic_ids).paginate(page: params[:page], per_page: 4)
   end
 
   def update

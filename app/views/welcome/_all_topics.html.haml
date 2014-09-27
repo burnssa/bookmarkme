@@ -1,34 +1,16 @@
--if current_user
-	- @others_topics.each do |topic|
-		.row
-		%br 
-		%p
-			= topic.title 
-			#{link_to(" See more", topic_path(topic))}
-			.div
-				%br
-				- topic_bookmarks = topic.bookmarks
-				.row
-					- topic_bookmarks[0..4].each do |bookmark|
-						.col-xs-3.col-xs-3
-							%p{:style => "word-break:break-all;"}
-								- if bookmark.thumbnail_url
-									= image_tag(bookmark.thumbnail_url, size: "64x64")
-								= link_to bookmark.description, bookmark.url
--else
-	- @all_topics.each do |topic|
-		.row
-		%br 
-		%p
-			= topic.title 
-			#{link_to(" See more", topic_path(topic))}
-			.div
-				%br
-				- topic_bookmarks = topic.bookmarks
-				.row
-					- topic_bookmarks[0..4].each do |bookmark|
-						.col-xs-3.col-xs-3
-							%p{:style => "word-break:break-all;"}
-								- if bookmark.thumbnail_url
-									= image_tag(bookmark.thumbnail_url, size: "64x64")
-								= link_to bookmark.description, bookmark.url
+- @all_topics.each do |topic|
+	.row
+	%br 
+	%p
+		= topic.title 
+		#{link_to(" See more", topic_path(topic))}
+		.div
+			%br
+			- topic_bookmarks = topic.bookmarks
+			.row
+				- topic_bookmarks[0..4].each do |bookmark|
+					.col-xs-3.col-xs-3
+						%p{:style => "word-break:break-all;"}
+							- if bookmark.thumbnail_url
+								= image_tag(bookmark.thumbnail_url, size: "64x64")
+							= link_to bookmark.description, bookmark.url

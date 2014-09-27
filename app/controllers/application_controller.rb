@@ -8,6 +8,7 @@ private
 	def current_user
 		@current_user ||= User.find(session[:user_id]) if session[:user_id]
 	end
+
 	helper_method :current_user
 
 	def authorize
@@ -15,7 +16,6 @@ private
 	end
 
   def show_topics_page
-    render topics_path if current_user?  # you have to define maintenance?
+    redirect_to topics_path if (User == current_user)
   end
-
 end
