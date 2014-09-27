@@ -18,7 +18,7 @@ Bookmarkme::Application.routes.draw do
   post :incoming, to: 'incoming#create'
   get :incoming, to: 'incoming#create'
   
-  root :to => 'topics#index', :constraints => RoleConstraint.new(:current_user) #matches this route when the current user is an user
+  root :to => 'topics#index', :constraints => RoleConstraint.new(user: current_user) #matches this route when the current user is an user
   root :to => 'welcome#index'
 
   # def create_route
