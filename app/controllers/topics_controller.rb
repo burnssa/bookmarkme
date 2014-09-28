@@ -25,22 +25,25 @@ respond_to :html, :json
 
   def show
   	@topic = Topic.find(params[:id])
-    @own_bookmark_ids = current_user.bookmarks.collect { |b| b[:id] }.to_a
-    @liked_bookmark_ids = []
-    
-    Bookmark.all.each do |b|
-      if current_user.liked(b)
-        @liked_bookmark_ids << b.id
-      end
-      @liked_bookmark_ids
-    end
-
-    @personal_bookmark_ids = @own_bookmark_ids + @liked_bookmark_ids
-
     if current_user
+      @own_bookmark_ids = current_user.bookmarks.collect { |b| b[:id] }.to_a
+
+      @liked_bookmark_ids = []
+    
+      Bookmark.all.each do |b|
+        if current_user.liked(b)
+          @liked_bookmark_ids << b.id
+        end
+        @liked_bookmark_ids
+      end
+    
+      @personal_bookmark_ids = @own_bookmark_ids + @liked_bookmark_ids
       @personal_bookmarks = @topic.bookmarks.where(id: @personal_bookmark_ids).paginate(page: params[:page], per_page: 10)
-    end
-    @others_bookmarks = @topic.bookmarks.where.not(id: @personal_bookmark_ids).paginate(page: params[:page], per_page: 10)
+      @others_bookmarks = @topic.bookmarks.where.not(id: @personal_bookmark_ids).paginate(page: params[:page], per_page: 10)
+    else 
+      @others_bookmarks = @topic.bookmarks
+      @personal_bookmarks = []
+    end 
   end
 
   def topic_params

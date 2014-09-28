@@ -14,12 +14,12 @@
 		- else 
 			You don't have any bookmarks on #{@topic.title}
 
-
 	%h3 The latest other bookmarks from around the web on #{@topic.title}
 	- @others_bookmarks.each do |bookmark|
 		%p{:style => "word-break;"}
 			= link_to bookmark.description, bookmark.url
-			= render partial: 'likes/like', locals: { bookmark: bookmark }
+			- if current_user
+				= render partial: 'likes/like', locals: { bookmark: bookmark }
 %br
 %p 
 	= link_to "Back", topics_path
