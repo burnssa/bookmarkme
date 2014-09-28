@@ -2,19 +2,24 @@ class TopicsController < ApplicationController
 respond_to :html, :json
 
   def index
-    @user_topic_ids = current_user.bookmarks.collect { |b| b[:topic_id] }.to_a 
     @liked_topic_ids = []
-
-    current_user.bookmarks.each do |b|
-      if current_user.liked(b)
-        @liked_topic_ids << current_user.liked(b).bookmark.topic_id
+    if current_user
+      @user_topic_ids = current_user.bookmarks.collect { |b| b[:topic_id] }.to_a 
+      
+      current_user.bookmarks.each do |b|
+        if current_user.liked(b)
+          @liked_topic_ids << current_user.liked(b).bookmark.topic_id
+        end
+        @liked_topic_ids
       end
-      @liked_topic_ids
-    end
 
-    @personal_topic_ids = (@user_topic_ids + @liked_topic_ids).uniq
-    @own_topics = Topic.where(id: @personal_topic_ids).paginate(page: params[:page], per_page: 4)	
-    @others_topics = Topic.where.not(id: @personal_topic_ids).paginate(page: params[:page], per_page: 4)
+      @personal_topic_ids = (@user_topic_ids + @liked_topic_ids).uniq
+      @own_topics = Topic.where(id: @personal_topic_ids).paginate(page: params[:page], per_page: 4)	
+      @others_topics = Topic.where.not(id: @personal_topic_ids).paginate(page: params[:page], per_page: 4)
+    else
+      @own_topics = []
+      @others_topics = Topic.all.paginate(page: params[:page], per_page: 4)  
+    end
   end
 
   def update
