@@ -4,4 +4,4 @@
 
 %h3 The latest posts from around the web
 
-= render partial: 'all_topics'
+= render partial: 'all_topics', locals: { others_topics: @others_topics }

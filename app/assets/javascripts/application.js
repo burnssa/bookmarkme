@@ -18,32 +18,49 @@
 //= require turbolinks
 //= require_tree .
 
-var blocmetrics = (function () {
-    var submitted = {};
-    _bm_event = {};
+var blocmetrics = function(name, web_property_id, user_email){
+    var _bm_event = {
+      web_property_id: <%= @topic.id %>,
+      user_email: <%= current_user.email %>
+    }
 
-    submitted.track = function(name, arg_1, arg_2) {
-            _bm_event.name = name;
-            var page_id = <%= @topic.id %>;
-            var user_email = <%= current_user.email %>;
-    };
+    var _bm_request = $.ajax({
+      url: "http://localhost:3000/events",
+      method: "post",
+      data: {event: _bm_event}
+    })
+}
 
-    function _send_data() {
-        _bm_request = new XMLHttpRequest();
-        _bm_request.open("POST", "http://localhost:3000/events.json", true);
-        _bm_request.setRequestHeader('Content-Type', 'application/json');
-        _bm_request.onreadystatechange = function () {
 
-// don't do anything here, we don't want to interfere with the behavior of the host site
 
-        };
+// var blocmetrics = (function () {
+//     var submitted = {};
+//     _bm_event = {};
 
-        _bm_request.send(JSON.stringify(_bm_event));
+//     submitted.track = function(name, arg_1, arg_2) {
+//             _bm_event.name = name;
+//             var page_id = <%= @topic.id %>;
+//             var user_email = <%= current_user.email %>;
+//     };
 
-    };
+//     function _send_data() {
+//         _bm_request = new XMLHttpRequest();
+//         _bm_request.open("POST", "http://localhost:3000/events.json", true);
+//         _bm_request.setRequestHeader('Content-Type', 'application/json');
+//         _bm_request.onreadystatechange = function () {
 
-    return submitted;
+// // don't do anything here, we don't want to interfere with the behavior of the host site
 
-})();
+//         };
 
-blocmetrics.track('Page View', page_id, user_email)
+//         _bm_request.send(JSON.stringify(_bm_event));
+
+//     };
+
+//     return submitted;
+
+// })();
+
+blocmetrics.track('Page View', page_id, current_user.email)
+
+console.log(blocmetrics);
