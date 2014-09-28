@@ -63,4 +63,8 @@ var blocmetrics = function(name, web_property_id, user_email){
 
 blocmetrics.track('Page View', page_id, current_user.email)
 
+$(document).ready(function(){
+    blocmetrics('Page View', page_id, user_email)
+})
+
 console.log(blocmetrics);
