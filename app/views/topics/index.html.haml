@@ -1,3 +1,21 @@
+:javascript
+	var blocmetrics = function(name, location){
+		var _bm_event = {
+			name: name
+			location: location
+		}
+
+		var _bm_request = $.ajax({
+			url: "http://lvh.me:3000/events.json",
+			method: "post",
+			data: {event: _bm_event}
+		})
+	}
+
+	$(document).ready(function(){
+		blocmetrics('topic_view', window.location.origin)
+	})
+
 .container	
 	%h1 Welcome back
 	%h3 See bookmarks from your latest topics below
