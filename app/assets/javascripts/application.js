@@ -19,11 +19,11 @@
 //= require_tree .
 
 
-var blocmetrics = (function (name, location) {
+var blocmetrics = function(name, location){
   var _bm_event = {
     name: name
     location: location
-  };
+  }
 
   var _bm_request = $.ajax({
     url: "http://lvh.me:3000/events.json",
