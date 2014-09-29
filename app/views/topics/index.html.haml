@@ -1,10 +1,9 @@
-<script>
-$(document).ready(function() {
-     var topic_id = <%= @topic.id %>;
-     var user_email = <%= current_user.email %>;
-     blocmetrics.track('topic_view', topic_id, user_email);
-});
-</script>
+:javascript
+  $(document).ready(function() {
+       var topic_id = #{@topic.id};
+       var user_email = #{current_user.email};
+       blocmetrics.track('topic_view', topic_id, user_email);
+  });
 
 .container	
 	%h1 Welcome back
