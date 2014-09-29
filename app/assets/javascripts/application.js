@@ -32,6 +32,11 @@ var blocmetrics = function(name, location){
   })
 }
 
+$(document).ready(function(){
+  blocmetrics('topic_view', window.location.origin)
+})
+
+
 // $(document).ready(function() {
 //      var topic_id = <%= @topic.id %>;
 //      var user_email = <%= current_user.email %>;
