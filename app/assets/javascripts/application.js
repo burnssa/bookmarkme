@@ -20,8 +20,8 @@
 
 var blocmetrics = function(name, web_property_id, user_email){
     var _bm_event = {
-      web_property_id: <%= @topic.id %>,
-      user_email: <%= current_user.email %>
+      web_property_id: web_property_id
+      user_email: user_email
     }
 
     var _bm_request = $.ajax({
@@ -33,13 +33,13 @@ var blocmetrics = function(name, web_property_id, user_email){
 
 
 $(document).ready(function(){
-    blocmetrics('Page View', page_id, user_email)
+    blocmetrics('Page View', "www.bookmarkme.co/topics", "<%= current_user.email %>")
 });
 
-console.log(blocmetrics);
+// console.log(blocmetrics);
 
 
-blocmetrics.track('Page View', page_id, current_user.email)
+// blocmetrics.track('Page View', page_id, current_user.email)
 
 // var blocmetrics = (function () {
 //     var submitted = {};
