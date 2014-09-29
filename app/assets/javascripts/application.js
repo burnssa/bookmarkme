@@ -32,11 +32,9 @@ var blocmetrics = function(name, web_property_id, user_email){
 }
 
 
-<script>
 $(document).ready(function(){
     blocmetrics('Page View', page_id, user_email)
 });
-</script>
 
 console.log(blocmetrics);
 
