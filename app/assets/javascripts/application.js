@@ -19,34 +19,18 @@
 //= require_tree .
 
 
-var blocmetrics = (function () {
-    var submitted = {};
-    _bm_event = {};
+var blocmetrics = (function (name, location) {
+  var _bm_event = {
+    name: name
+    location: location
+  };
 
-    submitted.track = function(name, arg_1, arg_2) {
-            _bm_event.name = name;
-            _bm_event.property_1 = arg_1;
-            _bm_event.property_2 = arg_2;
-            _send_data();
-    };
-
-    function _send_data() {
-        _bm_request = new XMLHttpRequest();
-        _bm_request.open("POST", "http://lvh.me:3000/events.json", true);
-        _bm_request.setRequestHeader('Content-Type', 'application/json');
-        _bm_request.onreadystatechange = function () {
-
-        // don't do anything here, we don't want to interfere with the behavior of the host site
-
-        };
-
-        _bm_request.send(JSON.stringify(_bm_event));
-
-    };
-
-    return submitted;
-
-})();
+  var _bm_request = $.ajax({
+    url: "http://lvh.me:3000/events.json",
+    method: "post",
+    data: {event: _bm_event}
+  })
+}
 
 // $(document).ready(function() {
 //      var topic_id = <%= @topic.id %>;
