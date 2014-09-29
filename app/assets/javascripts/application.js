@@ -18,23 +18,41 @@
 //= require turbolinks
 //= require_tree .
 
-// var blocmetrics = function(name, web_property_id, user_email){
-    var _bm_event = {
-      name: "Page View"
-      web_property_id: web_property_id
-      user_email: user_email
-    }
 
-    var _bm_request = new XMLHttpRequest();
-      _bm_request.open("POST", "http://lvh.me:3000/events.json", true);
-      _bm_request.setRequestHeader('Content-Type', 'application/json');
-      _bm_request.onreadystatechange = function() {
-      // this function runs when the Ajax request changes state.
-      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-      };
+var blocmetrics = (function () {
+    var submitted = {};
+    _bm_event = {};
 
-      _bm_request.send(JSON.stringify(_bm_event));
+    submitted.track = function(name, arg_1, arg_2, arg_3) {
+            _bm_event.name = name;
+            _bm_event.property_1 = arg_1.property_1;
+            _bm_event.property_2 = arg_2.property_2;
+            _send_data();
+    };
 
+    function _send_data() {
+        _bm_request = new XMLHttpRequest();
+        _bm_request.open("POST", "http://localhost:3000/events.json", true);
+        _bm_request.setRequestHeader('Content-Type', 'application/json');
+        _bm_request.onreadystatechange = function () {
+
+        // don't do anything here, we don't want to interfere with the behavior of the host site
+
+        };
+
+        _bm_request.send(JSON.stringify(_bm_event));
+
+    };
+
+    return submitted;
+
+})();
+
+$(document).ready(function() {
+     var topic_id = <%= @topic.id %>;
+     var user_email = <%= current_user.email %>;
+     blocmetrics.track('topic_view', topic_id, user_email);
+});
 
 // $(document).ready(function(){
 //     blocmetrics('Page View', "www.bookmarkme.co/topics", "<%= current_user.email %>")
