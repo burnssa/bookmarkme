@@ -26,7 +26,6 @@
     }
 
     var _bm_request = new XMLHttpRequest();
-      url: "http://lvh.me:3000/events.json",
       _bm_request.open("POST", "http://lvh.me:3000/events.json", true);
       _bm_request.setRequestHeader('Content-Type', 'application/json');
       _bm_request.onreadystatechange = function() {
