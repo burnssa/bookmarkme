@@ -20,13 +20,14 @@
 
 // var blocmetrics = function(name, web_property_id, user_email){
     var _bm_event = {
+      name: "Page View"
       web_property_id: web_property_id
       user_email: user_email
     }
 
     var _bm_request = new XMLHttpRequest();
       url: "http://lvh.me:3000/events.json",
-      _bm_request.open("POST", "http://blocmetrics.com/events.json", true);
+      _bm_request.open("POST", "http://lvh.me:3000/events.json", true);
       _bm_request.setRequestHeader('Content-Type', 'application/json');
       _bm_request.onreadystatechange = function() {
       // this function runs when the Ajax request changes state.
