@@ -48,11 +48,11 @@ var blocmetrics = (function () {
 
 })();
 
-$(document).ready(function() {
-     var topic_id = <%= @topic.id %>;
-     var user_email = <%= current_user.email %>;
-     blocmetrics.track('topic_view', topic_id, user_email);
-});
+// $(document).ready(function() {
+//      var topic_id = <%= @topic.id %>;
+//      var user_email = <%= current_user.email %>;
+//      blocmetrics.track('topic_view', topic_id, user_email);
+// });
 
 // $(document).ready(function(){
 //     blocmetrics('Page View', "www.bookmarkme.co/topics", "<%= current_user.email %>")
