@@ -18,23 +18,27 @@
 //= require turbolinks
 //= require_tree .
 
-var blocmetrics = function(name, web_property_id, user_email){
+// var blocmetrics = function(name, web_property_id, user_email){
     var _bm_event = {
       web_property_id: web_property_id
       user_email: user_email
     }
 
-    var _bm_request = $.ajax({
-      url: "http://localhost:3000/events",
-      method: "post",
-      data: {event: _bm_event}
-    })
-}
+    var _bm_request = new XMLHttpRequest();
+      url: "http://lvh.me:3000/events.json",
+      _bm_request.open("POST", "http://blocmetrics.com/events.json", true);
+      _bm_request.setRequestHeader('Content-Type', 'application/json');
+      _bm_request.onreadystatechange = function() {
+      // this function runs when the Ajax request changes state.
+      // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+      };
+
+      _bm_request.send(JSON.stringify(_bm_event));
 
 
-$(document).ready(function(){
-    blocmetrics('Page View', "www.bookmarkme.co/topics", "<%= current_user.email %>")
-});
+// $(document).ready(function(){
+//     blocmetrics('Page View', "www.bookmarkme.co/topics", "<%= current_user.email %>")
+// });
 
 // console.log(blocmetrics);
 
