@@ -18,21 +18,21 @@
 //= require turbolinks
 //= require_tree .
 
-
 var blocmetrics = function(name, location){
   var _bm_event = {
-    name: name
+    name: name,
     location: location
   }
 
   var _bm_request = $.ajax({
-    url: "http://lvh.me:3000/events.json",
+    url: "http://localhost:3000/events.json",
     method: "post",
     data: {event: _bm_event}
   })
 }
 
 $(document).ready(function(){
+  alert("fired");
   blocmetrics('topic_view', window.location.origin)
 })
 
