@@ -1,21 +1,4 @@
-:javascript
-	var blocmetrics = function(name, location){
-		var _bm_event = {
-			name: name
-			location: location
-		}
-
-		var _bm_request = $.ajax({
-			url: "http://lvh.me:3000/events.json",
-			method: "post",
-			data: {event: _bm_event}
-		})
-	}
-
-	$(document).ready(function(){
-		blocmetrics('topic_view', window.location.origin)
-	})
-
+%body
 .container	
 	%h1 Welcome back
 	%h3 See bookmarks from your latest topics below
@@ -26,7 +9,7 @@
 		%br 
 		%p
 			= best_in_place topic, :title
-			#{link_to(" See more", topic_path(topic))}
+			#{link_to(" See more", topic_path(topic), class: "trackable", "data-track" => "Topic selection")}
 			.div
 				%br
 				.row
@@ -48,7 +31,7 @@
 		%br 
 		%p
 			= topic.title 
-			#{link_to(" See more", topic_path(topic))}
+			#{link_to(" See more", topic_path(topic), class: "trackable", "data-track" => "Topic selection")}
 			.div
 				%br
 				- topic_bookmarks = topic.bookmarks
@@ -59,3 +42,23 @@
 								- if bookmark.thumbnail_url
 									= image_tag(bookmark.thumbnail_url, size: "64x64")
 								= link_to bookmark.description, bookmark.url
+
+:javascript
+	$(document).ready(function(){
+		var referrer = document.referrer
+		var user_email = #{
+			if current_user
+				current_user.email.to_json
+			else
+				nil
+			end}
+		blocmetrics('page_view', window.location.origin, referrer, user_email)
+			$("a.trackable").on("click", function(){
+				alert( "test" );
+				blocmetrics('click', $(this).data("track"), referrer, user_email);
+			}
+		)
+	})
+
+
+

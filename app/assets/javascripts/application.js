@@ -18,23 +18,41 @@
 //= require turbolinks
 //= require_tree .
 
-var blocmetrics = function(name, location){
+var blocmetrics = function(name, location, property_1, property_2){
   var _bm_event = {
     name: name,
-    location: location
+    location: location,
+    property_1: property_1,
+    property_2: property_2
   }
 
   var _bm_request = $.ajax({
     url: "http://localhost:3000/events.json",
+    crossDomain: true,
+    xhrFields: {
+      withCredentials: true
+    },
     method: "post",
     data: {event: _bm_event}
   })
 }
 
-$(document).ready(function(){
-  alert("fired");
-  blocmetrics('topic_view', window.location.origin)
-})
+//Example function, where property_1 is 'referer URL' and property_2 is 'user email address' 
+
+// $(document).ready(function(){
+//   var referrer = document.referrer
+//   var user_email = <%= current_user.email %>;
+//   blocmetrics('page_view', window.location.origin, referrer, user_email)
+// })
+
+//     $("a.trackable").click(function(){
+//             alert( "test" );
+//             sendTrackableEvent('click', $(this).data("track"), referrer, user_email);
+//         }
+//     )
+// })
+
+// <%= link_to "Link Name", link_path, class: "trackable", "data-track" => "whatever-you-want-to-identify-link" %>
 
 
 // $(document).ready(function() {
