@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140921215252) do
+ActiveRecord::Schema.define(version: 20141012003434) do
 
   create_table "bookmarks", force: true do |t|
     t.datetime "created_at"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140921215252) do
     t.integer  "user_id"
     t.integer  "topic_id"
     t.string   "description"
+    t.string   "thumbnail"
   end
 
   add_index "bookmarks", ["topic_id"], name: "index_bookmarks_on_topic_id"

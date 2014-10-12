@@ -10,6 +10,8 @@ gem 'best_in_place', :git => 'https://github.com/aaronchi/best_in_place.git'
 
 gem 'haml', '~> 4.0.5'
 gem 'haml-rails'
+gem 'rmagick', '2.13.2'
+gem 'paperclip', '~> 4.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.8'
