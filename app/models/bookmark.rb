@@ -13,14 +13,22 @@ class Bookmark < ActiveRecord::Base
 	end
 
 	def thumbnail_url
+    if thumbnail_url.blank?
+    	url = refresh_thumbnail_url
+    else
+    	url
+    end
+	end
+
+	def refresh_thumbnail_url
     obj = embedly_api.oembed :url => self.url
 
     Rails.logger.info obj[0].inspect
     json_obj = JSON.pretty_generate(obj[0].marshal_dump)
     puts json_obj
 
-    thumbnail_url = obj[0].thumbnail_url unless obj[0].blank? || obj[0].thumbnail_url.blank?
+    new_thumbnail_url = obj[0].thumbnail_url unless obj[0].blank? || obj[0].thumbnail_url.blank?
     #Rails.logger.info ">>>>>>>>>>>> #{thumbnail_url}"
-    thumbnail_url
+    new_thumbnail_url
 	end
 end
