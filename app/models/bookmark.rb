@@ -5,8 +5,6 @@ class Bookmark < ActiveRecord::Base
 
   default_scope { order('updated_at DESC') }
 
-	#attr_accessor :thumbnail_url
-
 	def embedly_api
 		#Rails.logger.info ">>>>>>>>>> Embedly key: #{ENV['EMBEDLY_API']}"
 		embedly_api = Embedly::API.new :key => ENV['EMBEDLY_API'], :user_agent => 'Chrome/37.0 (compatible; bookmarkme/1.0; burnssa@gmail.com)'
@@ -27,7 +25,7 @@ class Bookmark < ActiveRecord::Base
     json_obj = JSON.pretty_generate(obj[0].marshal_dump)
     puts json_obj
 
-    new_thumbnail_url = obj[0].thumbnail_url unless obj[0].blank? || obj[0].thumbnail_url.blank?
+    new_thumbnail_url = obj[0].refresh_thumbnail_url unless obj[0].blank? || obj[0].refresh_thumbnail_url.blank?
     #Rails.logger.info ">>>>>>>>>>>> #{thumbnail_url}"
     new_thumbnail_url
 	end
