@@ -11,6 +11,7 @@
 				- topic_bookmarks[0..4].each do |bookmark|
 					.col-xs-3.col-xs-3
 						%p{:style => "word-break:break-all;"}
-							- if bookmark.thumbnail
-								= image_tag(bookmark.thumbnail, size: "64x64")
+							- if bookmark.thumbnail_url
+								= render partial: 'topics/bookmark', locals: { bookmark: bookmark }
 							= link_to bookmark.description, bookmark.url
+			%hr

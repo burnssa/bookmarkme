@@ -6,11 +6,12 @@
 			- @personal_bookmarks.each do |bookmark|
 				%p{:style => "word-break;"}
 					= link_to bookmark.description, bookmark.url
-					- if bookmark.thumbnail
-						= image_tag(bookmark.thumbnail, size: "64x64")
+					- if bookmark.thumbnail_url
+						= render partial: 'bookmark', locals: { bookmark: bookmark }
 					= render partial: 'likes/like', locals: { bookmark: bookmark }
 					- if bookmark.user_id == current_user.id
 						= render partial: 'bookmarks/bookmark', locals: { bookmark: bookmark }
+				%hr
 		- else 
 			You don't have any bookmarks on #{@topic.title}
 
@@ -18,8 +19,11 @@
 	- @others_bookmarks.each do |bookmark|
 		%p{:style => "word-break;"}
 			= link_to bookmark.description, bookmark.url
+			- if bookmark.thumbnail_url
+				= render partial: 'bookmark', locals: { bookmark: bookmark }
 			- if current_user
 				= render partial: 'likes/like', locals: { bookmark: bookmark }
+		%hr
 %br
 %p 
 	= link_to "Back", topics_path

@@ -52,7 +52,7 @@ respond_to :html, :json
   end
 
   def topic_params
-    params.require(:topic).permit(:title)
+    params.require(:topic).permit(:title, :thumbnail)
   end
 
 end
